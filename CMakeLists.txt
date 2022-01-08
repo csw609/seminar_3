@@ -7,13 +7,15 @@ project(seminar_3)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+# 캐킨 빌드 시 요구되는 패키지
+# 의존성 패키지라하며 아래 쓰여진 패키지가 존재하지 않으면 빌드 에러가 발생함
 find_package(catkin REQUIRED COMPONENTS
   message_generation
   roscpp
   std_msgs
 )
 
-# service
+# service 서비스 파일 선언
 add_service_files(FILES SrvTutorial.srv)
 
 ## System dependencies are found with CMake's conventions
@@ -34,7 +36,7 @@ add_service_files(FILES SrvTutorial.srv)
 ## * Let MSG_DEP_SET be the set of packages whose message types you use in
 ##   your messages/services/actions (e.g. std_msgs, actionlib_msgs, ...).
 ## * In the file package.xml:
-##   * add a build_depend tag for "message_generation"
+##   * add a build_depend tag for "message_generation"언
 ##   * add a build_depend and a exec_depend tag for each package in MSG_DEP_SET
 ##   * If MSG_DEP_SET isn't empty the following dependency has been pulled in
 ##     but can be declared for certainty nonetheless:
@@ -71,6 +73,7 @@ add_service_files(FILES SrvTutorial.srv)
 # )
 
 ## Generate added messages and services with any dependencies listed here
+# 아래 명시된 패키지가 설치되어 있지 않다면 빌드 에러 발생
 generate_messages(
   DEPENDENCIES
   std_msgs
@@ -105,6 +108,7 @@ generate_messages(
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+# 라이브러리, 캐킨 빌드 의존성 시스템 의존 패키지를 기술한다.
 catkin_package(
     LIBRARIES seminar_3
     CATKIN_DEPEND std_msgs roscpp
@@ -116,6 +120,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+# include 결로 설정
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
@@ -137,11 +142,11 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/seminar_3_node.cpp)
 
 add_executable(seminar_srv src/seminar_srv.cpp)
-add_dependencies(seminar_srv ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(seminar_srv ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS}) #추가적인 의존성
 target_link_libraries(seminar_srv ${catkin_LIBRARIES})
 
 add_executable(seminar_client src/seminar_client.cpp)
-add_dependencies(seminar_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(seminar_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(seminar_client ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
